@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "-": "^0.0.1",
+    "bcrypt": "^5.1.1",
+    "D": "^1.0.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-validator": "^7.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.9.7",
+    "nodemon": "^3.1.0"
+  },
+  "scripts": {
+    "server:start": "node server.js",
+    "server:dev": "nodemon server.js"
+  },
+  "name": "express-auth",
+  "version": "1.0.0",
+  "main": "server.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
