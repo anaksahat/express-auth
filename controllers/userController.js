@@ -58,6 +58,17 @@ const createNewUser = async (req, res) => {
       errors: errors.array(),
     });
   try {
+    // CHECK APAKAH USER UDAH DI DATABASE
+    const [user] = await database.query(
+      `SELECT  email FROM users WHERE email = ?`,
+      [email]
+    );
+
+    if (user.length > 0)
+      return res.json({
+        error: "Use another email!",
+      });
+
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
     const [result] = await database.query(

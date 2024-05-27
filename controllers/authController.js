@@ -11,7 +11,7 @@ async function register(req, res) {
   if (!errors.isEmpty())
     return res.status(400).json({
       message: "Bad request",
-      errors: errors.Array(),
+      errors: errors.array(),
     });
 
   try {
@@ -59,7 +59,7 @@ async function login(req, res) {
       [email]
     );
     if (users.length === 0)
-      return res.status(400).json({ message: "Invalid email or password" });
+      return res.status(400).json({ error: "Invalid email or password" });
 
     const user = users[0];
 
@@ -67,7 +67,7 @@ async function login(req, res) {
     const isValidPassword = await bcrypt.compare(password, user.password);
 
     if (!isValidPassword) {
-      return res.status(400).json({ message: "Invalid email or password" });
+      return res.status(400).json({ error: "Invalid email or password" });
     }
 
     // BUAT JWT TOKEN
@@ -79,10 +79,11 @@ async function login(req, res) {
     res.cookie("jwt", token, { maxAge: 60 * 60 * 1000 }); //ms
     res.json({
       token,
+      user: user.id,
     });
   } catch (error) {
     console.error("Login error:", error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ error: "Internal server error" });
   }
 }
 
