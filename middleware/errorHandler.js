@@ -1,9 +1,8 @@
-const errorhanlder = (err, req, res, next) => {
+const errorhandler = (err, req, res, next) => {
   console.error(err);
   res.status(500).json({
     error: "Something went wrong",
   });
-  next();
 };
 
-module.exports = errorhanlder;
+module.exports = errorhandler;

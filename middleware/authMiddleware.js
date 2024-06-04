@@ -4,7 +4,8 @@ const database = require("../model/database");
 
 const authMiddleware = async (req, res, next) => {
   // AMBIL TOKEN DARI request headers
-  const token = req.headers.authorization.split(" ")[1];
+  console.log(req.headers?.authorization);
+  const token = req.headers?.authorization?.split(" ")[1];
 
   if (token === null)
     return res.status(401).json({ message: "Unauthorized: Token missing" });
