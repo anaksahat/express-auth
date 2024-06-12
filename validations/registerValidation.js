@@ -1,5 +1,8 @@
-const registerValidation = {
-  name: {
+const { checkSchema } = require('express-validator');
+
+const schema = {
+  Username: {
+    in: ['body'],
     notEmpty: {
       errorMessage: "Must be not empty",
     },
@@ -11,9 +14,13 @@ const registerValidation = {
       errorMessage: "At least must be 3-255 Characters",
     },
   },
-  email: {
+  Email: {
+    in: ['body'],
     notEmpty: {
       errorMessage: "Must be not empty",
+    },
+    isEmail: {
+      errorMessage: "Must be valid Email",
     },
     isLength: {
       options: {
@@ -21,11 +28,9 @@ const registerValidation = {
       },
       errorMessage: "Email not more than 255 Characters",
     },
-    isEmail: {
-      errorMessage: "Must be valid Email",
-    },
   },
-  password: {
+  Password: {
+    in: ['body'],
     notEmpty: {
       errorMessage: "Must be not empty",
     },
@@ -38,4 +43,5 @@ const registerValidation = {
     },
   },
 };
-module.exports = registerValidation;
+
+module.exports = checkSchema;

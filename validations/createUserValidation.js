@@ -1,42 +1,47 @@
-const createUserValidation = {
-  name: {
+const { checkSchema } = require('express-validator');
+
+const schema = {
+  Username: {
+    in: ['body'],
     notEmpty: {
-      errorMessage: "Must be not empty",
+      errorMessage: "Username must not be empty",
     },
     isLength: {
       options: {
         min: 3,
         max: 255,
       },
-      errorMessage: "At least must be 3-255 Characters",
+      errorMessage: "Username must be 3-255 characters long",
     },
   },
-  email: {
+  Email: {
+    in: ['body'],
     notEmpty: {
-      errorMessage: "Must be not empty",
+      errorMessage: "Email must not be empty",
     },
     isEmail: {
-      errorMessage: "Must be valid email",
+      errorMessage: "Must be a valid email",
     },
     isLength: {
       options: {
         max: 255,
       },
-      errorMessage: "Email not more than 255 characters",
+      errorMessage: "Email must not be more than 255 characters",
     },
   },
-  password: {
+  Password: {
+    in: ['body'],
     notEmpty: {
-      errorMessage: "Must be not empty",
+      errorMessage: "Password must not be empty",
     },
     isLength: {
       options: {
         min: 6,
         max: 128,
       },
-      errorMessage: "At least 6-128 characters",
+      errorMessage: "Password must be 6-128 characters long",
     },
   },
 };
 
-module.exports = createUserValidation;
+module.exports = checkSchema;

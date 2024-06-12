@@ -6,27 +6,40 @@ const { checkSchema } = require("express-validator");
 const createUserValidation = require("../validations/createUserValidation");
 const updateUserValidation = require("../validations/updateUserValidation");
 
-// METHOD GET MENDAPATKAN SEMUA DATA USER
-router.get("/", userController.getAllUsers);
+// Get all users
+router.get("/user", userController.getAllUsers);
 
-// METHOD POST MENAMBAHKAN DATA USER BARU
+// Register a new user
 router.post(
-  "/",
+  "/register",
   checkSchema(createUserValidation),
   userController.createNewUser
 );
 
-// PUT METHOD Mengupdate data user sesuai dengan ID-nya
-router.put("/:id", userController.updateUserById);
+// Update a user by ID
+router.put(
+  "update/:id",
+  checkSchema(updateUserValidation),
+  userController.updateUserById
+);
 
-// METHOD DELETE untuk menghapus user
+// Delete a user by ID
 router.delete(
   "/:id",
   checkSchema(updateUserValidation),
   userController.deleteUserById
 );
 
-// METHOD GET dengan paramter id
+// Get a user by ID
 router.get("/:id", userController.getUserById);
+
+// Route to get a user by UserID
+router.get('/by-userid/:userId', userController.getUserByUserID);
+
+// Route to get a user by UserName
+router.get('/by-username/:userName', userController.getUserByUserName);
+
+// Login route
+router.post('/login', userController.loginUser);
 
 module.exports = router;
